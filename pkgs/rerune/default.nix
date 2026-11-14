@@ -5,23 +5,23 @@
 }:
 
 let
-  version = "1.0.22";
+  version = "1.0.23";
   sources = {
     x86_64-linux = fetchurl {
-      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.22/rerune_1.0.22_linux_amd64.tar.gz";
-      sha256 = "02f4a46e78c1f94dfc8f44b44ea0b1b449a67069e333cbbc6a0c54b0b0089dab";
+      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.23/rerune_1.0.23_linux_amd64.tar.gz";
+      sha256 = "1ef615c9865b819ff846c3ab7b913ab0d9bcc252d78d2492424d256623b635fe";
     };
     aarch64-linux = fetchurl {
-      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.22/rerune_1.0.22_linux_arm64.tar.gz";
-      sha256 = "fb4dfa164e5cc2090d093360540de18c6f4d9e8b90058390da88530118d9185f";
+      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.23/rerune_1.0.23_linux_arm64.tar.gz";
+      sha256 = "0ffc2dc5a57343e9cd20d61d5842fb991430d4a21edc23ad5bdd37dc2eb88e09";
     };
     x86_64-darwin = fetchurl {
-      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.22/rerune_1.0.22_darwin_amd64.tar.gz";
-      sha256 = "b88bc36d90719a325a970a558c3c3966fae0cf7385852aee6cdf7e8f5644a6ca";
+      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.23/rerune_1.0.23_darwin_amd64.tar.gz";
+      sha256 = "f8e6da4a9c8d618b8911e92d2c3720817aa245f2e522610eb6244402fdd444ed";
     };
     aarch64-darwin = fetchurl {
-      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.22/rerune_1.0.22_darwin_arm64.tar.gz";
-      sha256 = "89cbabe9d36ce07359928a22e57694da729a3848505f1ea5a42331caaf611d29";
+      url = "https://raw.githubusercontent.com/BasalBit/rerune-releases/main/v1.0.23/rerune_1.0.23_darwin_arm64.tar.gz";
+      sha256 = "05e890ba9fc166a4eefe54cf26f37c6a417300717082c03b39d5fe3d2b50beb1";
     };
   };
   system = stdenvNoCC.hostPlatform.system;
