@@ -1,0 +1,53 @@
+# Generated from BasalBit/rerune-cli packaging/nix/repo; every release replaces this file.
+name: ci
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.event_name == 'push' && 'nix-rerune-staging' || format('nix-rerune-pr-{0}', github.ref) }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: test (${{ matrix.system }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-latest
+            system: x86_64-linux
+          - runner: ubuntu-24.04-arm
+            system: aarch64-linux
+          - runner: macos-latest
+            system: aarch64-darwin
+          - runner: macos-26-intel
+            system: x86_64-darwin
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - uses: cachix/install-nix-action@75c75c31ebece974e48ebc36b4ad125bd97bd97b # v31.11.3
+        with:
+          github_access_token: ${{ github.token }}
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Build, run and verify rerune
+        run: ./ci/check-package.sh "$SYSTEM"
+        env:
+          SYSTEM: ${{ matrix.system }}
+
+      - name: Evaluate the repository the way NUR does
+        if: matrix.system != 'x86_64-darwin'
+        run: ./ci/nur-eval.sh
